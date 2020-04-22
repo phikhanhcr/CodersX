@@ -2,8 +2,13 @@
   "books": [
     {
       "title": "Conan",
-      "desc": "Aoyama Ghoso",
-      "id": "boFai_rTX"
+      "desc": "Detective",
+      "id": "hyVg7hujH"
+    },
+    {
+      "title": "Doraemon",
+      "desc": "Anime",
+      "id": "JeD3UciCF"
     }
   ]
 }
