@@ -11,6 +11,14 @@ var db = require('./db.js');
 var removeAccents = require('./removeAccents.js');
 var shortId = require('shortid');
 // our default array of dreams
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+ 
+// parse application/json
+app.use(bodyParser.json())
+app.set('view engine', 'pug')
+app.set('views', './views');
+
 const dreams = [
   "Find and count some sheep",
   "Climb a really tall mountain",
@@ -33,12 +41,15 @@ app.get("/dreams", (request, response) => {
 });
 
 app.get('/books' , (req, res) => {
-  var db = db.get('books').value();
+  var books = db.get('books').value();
   res.render('book' , {
-    "books" : db
+    "books" : books
   })
 })
 
+app.get('/books/search' , (req, res) => {
+  var 
+})
 
 // listen for requests :)
 const listener = app.listen(process.env.PORT, () => {
