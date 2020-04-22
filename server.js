@@ -5,7 +5,11 @@
 // but feel free to use whatever libraries or frameworks you'd like through `package.json`.
 const express = require("express");
 const app = express();
-
+var pug = require('pug');
+var bodyParser = require('body-parser')
+var db = require('./db.js');
+var removeAccents = require('./removeAccents.js');
+var shortId = require('shortid');
 // our default array of dreams
 const dreams = [
   "Find and count some sheep",
@@ -27,6 +31,14 @@ app.get("/dreams", (request, response) => {
   // express helps us take JS objects and send them as JSON
   response.json(dreams);
 });
+
+app.get('/books' , (req, res) => {
+  var db = db.get('books').value();
+  res.render('book' , {
+    "books" : db
+  })
+})
+
 
 // listen for requests :)
 const listener = app.listen(process.env.PORT, () => {
