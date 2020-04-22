@@ -48,7 +48,8 @@ app.get('/books' , (req, res) => {
 })
 
 app.get('/books/search' , (req, res) => {
-  var 
+  var search = req.query.search;
+  
 })
 
 // listen for requests :)
