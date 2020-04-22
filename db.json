@@ -1,11 +1,6 @@
 {
   "books": [
     {
-      "title": "name",
-      "id": "1",
-      "desc": "hellp"
-    },
-    {
       "title": "Conan",
       "desc": "Aoyama Ghoso",
       "id": "boFai_rTX"

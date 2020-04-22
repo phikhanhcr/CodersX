@@ -10,25 +10,15 @@ head
 header
   h1 Child's Dream  
 br
-a.btn.btn-primary(href='/books/create') Create
+a.btn.btn-primary(href='/books') Get back
 br
 br
-form(action="/books/search",method="GET")
-  input(type='text', placeholder='Search in here', name='search')
+form(method="POST")
+  input(type='text', placeholder='Which title do you want it to be ? ', name='edit')
   button#btn.btn.btn-primary
-    | Search
-  button(href="/books").btn.btn-primary
-    | Show All  
-br
-ul#todo
-  each item in books
-    li 
-      span= item.title 
-      span &nbsp
-      a(href="/books/" + item.id) Delete
-      span &nbsp
-      span &nbsp
-      a(href="/books/edit/" + item.id) Edit
+    | Ok anh ơi
+
+
 script(src='https://button.glitch.me/button.js')
 
 
