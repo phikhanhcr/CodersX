@@ -50,7 +50,18 @@ app.get('/books' , (req, res) => {
 app.get('/books/create' , (req, res) => {
   res.render('create');
 }) 
-app.post('/books/create')
+app.post('/books/create' ,  (req, res) => {
+  var title = req.body.title;
+  var desc = req.body.desc;
+  var id = shortId.generate();
+  var value = {
+    title : title ,
+    desc : desc,
+    id : id
+  }
+  db.get('books').push(value).write();
+  res.redirect('/books');
+})
 // listen for requests :)
 const listener = app.listen(process.env.PORT, () => {
   console.log("Your app is listening on port " + listener.address().port);
