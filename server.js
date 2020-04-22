@@ -62,6 +62,25 @@ app.post('/books/create' ,  (req, res) => {
   db.get('books').push(value).write();
   res.redirect('/books');
 })
+
+app.get('/books/search' , (req, res ) => {
+  var search = req.query.search;
+  var list = db.get('books').value().filter(ele => {
+    return removeAccents(ele.title).toLowerCase().indexOf(removeAccents(search).toLowerCase()) !== -1;
+  })
+  res.render('book' , {
+    'books' : list
+  })
+})
+
+app.get('/books/:id' , (req, res) => {
+  var id = req.params.id;
+  db.get('books')
+    .remove({id : id})
+    .write();
+  res.redirect('/books');
+})
+
 // listen for requests :)
 const listener = app.listen(process.env.PORT, () => {
   console.log("Your app is listening on port " + listener.address().port);
