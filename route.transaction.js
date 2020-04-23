@@ -7,18 +7,19 @@ var removeAccents = require("./removeAccents.js");
 
 router.get('/' , (req, res) => {
   var transaction = db.get('transaction').value();
+  
   // 1 . find userId in transaction
-  var userId = transaction.map(ele => {    // []  array Id of db.get('transaction');
+  var usersId = transaction.map(ele => {    // []  array Id of db.get('transaction');
     return ele.userId;
   })
   // 2 . get all object in user
   var arrayUser = db.get('users').value();  // []
   var userName = [];
   // filter based on id
-  for(var i = 0 ; i < userId.length ; i++ ) {
+  for(var i = 0 ; i < usersId.length ; i++ ) {
     arrayUser.filter(ele => {
-      if(ele.id = userId[i]) {
-        userName.push(userId[i])
+      if(ele.id = usersId[i]) {
+        userName.push(ele.name);
       }
     })
   }
@@ -31,13 +32,13 @@ router.get('/' , (req, res) => {
   for(var i = 0 ; i < booksId.length ; i++ ) {
     arrayBook.filter(ele => {
       if(ele.id = booksId[i]) {
-        bookName.push(booksId[i])
+        bookName.push(ele.title)
       }
     })
   }
   res.render('transaction' , {
     "books" : bookName, 
-    "users" : 
+    "users" : userName
   });
 })
 

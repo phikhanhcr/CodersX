@@ -8,26 +8,24 @@ head
   link(rel='stylesheet', href='/style.css')
   
 header
-  h1 Child's Dream - User
+  h1 Child's Dream - Transaction
 br
-a.btn.btn-primary(href='/users/create') Create
+a.btn.btn-primary(href='/transaction/create') Create
 br
 br
-form(action="/users/search",method="GET")
+form(action="/transaction/search",method="GET")
   input(type='text', placeholder='Search in here', name='search')
   button#btn.btn.btn-primary
     | Search
-  button(href="/users").btn.btn-primary
-    | Show All  
+button(href="/transaction").btn.btn-primary
+  | Show All  
 br
 ul#todo
   each item in users
-    li 
-      span= item.name 
+    li= item 
 ul
   each item in books
-    li
-      span= item.title 
+    li= item 
       
 script(src='https://button.glitch.me/button.js')
 
