@@ -6,7 +6,7 @@ html
     link#favicon(rel='icon', href='https://glitch.com/edit/favicon-app.ico', type='image/x-icon')
     link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css')
     link(rel='stylesheet', href='/style.css')
-
+    
   header
     h1 Child's Dream - Transaction
   br
@@ -14,19 +14,35 @@ html
   br
   br
   form(action="/transaction/search",method="GET")
-    input(type='text', placeholder='Search in here', name='search')
+    input(type='text', placeholder='Search in here', name='search').form-control.mb-2
     button#btn.btn.btn-primary
       | Search
   button(href="/transaction").btn.btn-primary
     | Show All  
   br
-  ul#todo
-    each item in users
-      li= item 
-  ul
-    each item in books
-      li= item 
-
+  .d-flex
+    .user(style="display:flex;flex-direction:column;align-items:center")
+      h3 User
+      ul
+        each item in users
+          li 
+            span= item
+            span &nbsp
+            a(href="/books/") Delete
+            span &nbsp
+            span &nbsp
+            a(href="/books/edit/") Edit
+            span= "->"
+    .user(style="display:flex;flex-direction:column;align-items:center")
+      h3 Books
+      ul
+        each items in books
+          li 
+            span= items
+            span &nbsp
+            a(href="/books/") Delete
+            span &nbsp
+            span &nbsp
+            a(href="/books/edit/") Edit  
+        
   script(src='https://button.glitch.me/button.js')
-
-

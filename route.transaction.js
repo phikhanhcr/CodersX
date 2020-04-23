@@ -18,7 +18,7 @@ router.get('/' , (req, res) => {
   // filter based on id
   for(var i = 0 ; i < usersId.length ; i++ ) {
     arrayUser.filter(ele => {
-      if(ele.id = usersId[i]) {
+      if(ele.id == usersId[i]) {
         userName.push(ele.name);
       }
     })
@@ -31,7 +31,7 @@ router.get('/' , (req, res) => {
   var bookName = [];
   for(var i = 0 ; i < booksId.length ; i++ ) {
     arrayBook.filter(ele => {
-      if(ele.id = booksId[i]) {
+      if(ele.id == booksId[i]) {
         bookName.push(ele.title)
       }
     })
