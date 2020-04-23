@@ -9,12 +9,13 @@ head
   
 header
   h1 Child's Dream  
-
-form(action="/books/create",method="POST")
-  input(type='text' ,placeholder='Title', name='title')
-  input(type='text' ,placeholder='Description', name='desc')
-  button#btn.btn.btn-primary
-    | Create
-script(src='https://button.glitch.me/button.js')
-
-
+  form(method='post' , style="width:350px").form-group
+    h3 USER:
+    select(name='user').form-control
+      each item in users
+        option= item
+    h3 BOOK:
+    select(name="book").form-control
+      each items in books
+        option= items
+    button.btn.btn-secondary.mt-3 Add

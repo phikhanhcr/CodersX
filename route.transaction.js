@@ -43,7 +43,27 @@ router.get('/' , (req, res) => {
 })
 
 router.get('/create' , (req, res) => {
-  res.render('transactionCreate');
+  var users = db.get('users').map('name').value();
+  var books = db.get('books').map('title').value();
+  res.render('transactionCreate' , {
+    "users" : users ,
+    "books" : books
+  });
+})
+
+router.post('/create' , (req, res) => {
+  var user = req.body.user;
+  var book = req.body.book;
+  var userId = db.get('users').find({name : user}).get('id').value();
+  var bookId = db.get('books').find({title : book}).get('id').value();
+  var id = shortId.generate();
+  var value = {
+    bookId : bookId , 
+    userId : userId , 
+    id : id
+  }
+  db.get('transaction').push(value).write();
+  res.redirect('/transaction');
 })
 
 
