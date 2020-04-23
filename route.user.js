@@ -16,5 +16,4 @@ router.get("/edit/:id", controller.edit);
 
 router.post("/edit/:id", controller.editPost );
 
-
 module.exports = router;
