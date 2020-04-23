@@ -10,6 +10,7 @@ var bodyParser = require("body-parser");
 
 var bookRouter = require('./route.book.js');
 var userRouter = require('./route.user.js');
+var transactionRouter = require('./route.transaction.js');
 // our default array of dreams
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -42,7 +43,7 @@ app.get("/dreams", (request, response) => {
 
 app.use('/books' , bookRouter);
 app.use('/users' , userRouter);
-
+app.use('/transaction' , transactionRouter);
 
 // listen for requests :)
 const listener = app.listen(process.env.PORT, () => {
