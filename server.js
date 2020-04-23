@@ -95,6 +95,8 @@ app.post('/books/edit/:id' , (req, res) => {
   res.redirect('/books');
 })
 
+
+
 app.get('/users', (req, res) => {
   var user = db.get('users').value();
   res.render('user' , {
@@ -134,13 +136,19 @@ app.get('/users/:id' , (req, res) => {
     .write();
   res.redirect('/users');
 })
+
 app.get('/users/edit/:id' , (req, res) => {
-  res.render()
+  res.render('userEdit');
 })
 
 app.post('/users/edit/:id' , (req, res) => {
   var id = req.params.id;
-  db.ge
+  var value = req.body.edit;
+  db.get('users')
+    .find({ id : id})
+    .assign({name : value})
+    .value();
+  res.redirect('/users');
 })
 
 
