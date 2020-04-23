@@ -66,9 +66,9 @@ module.exports.createPost = (req, res) => {
 
 module.exports.remove =  (req, res) => {
   var id = req.params.id;
-  db.get("books")
-    .remove({ id: id })
+  db.get('transaction')
+    .remove({id : id})
     .write();
-  res.redirect("/books");
+  res.redirect('/transaction')
 }
 
