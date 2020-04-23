@@ -36,5 +36,16 @@ html
       each i in per
         ul(style='list-style-type:none')
           li
-            a(href="/transaction/" + i.id) Delete    
+            a(href="/transaction/" + i.id) Delete
+    .user(style="display:flex;flex-direction:column;align-items:center")
+      h4.mb-4.ml-5 isComplete
+      each i in per
+        ul(style='list-style-type:none')
+          li
+            a(href="/transaction/" + i.id + '/complete') Complete
+    .user(style="display:flex;flex-direction:column;align-items:center")
+      h4.mb-4.ml-5 Circumstance
+      each i in per
+        ul(style='list-style-type:none')
+          li= i.isComplete 
   script(src='https://button.glitch.me/button.js')

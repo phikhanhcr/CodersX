@@ -4,17 +4,17 @@ var router = express.Router();
 var controller = require('./controller.user.js');
 
 
-router.get("/users", controller.index );
-router.get("/users/create", controller.create);
-router.post("/users/create", controller.createPost);
+router.get("/", controller.index );
+router.get("/create", controller.create);
+router.post("/create", controller.createPost);
 
-router.get("/users/search", controller.search );
+router.get("/search", controller.search );
 
-router.get("/users/:id", controller.remove );
+router.get("/:id", controller.remove );
 
-router.get("/users/edit/:id", controller.edit);
+router.get("/edit/:id", controller.edit);
 
-router.post("/users/edit/:id", controller.editPost );
+router.post("/edit/:id", controller.editPost );
 
 
 module.exports = router;

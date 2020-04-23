@@ -11,4 +11,5 @@ router.post('/create' , controller.createPost);
 
 router.get('/:id' , controller.remove)
 
+router.get('/transaction/:id/complete' , controller.complete ); 
 module.exports = router;

@@ -37,7 +37,7 @@ module.exports.index = (req, res) => {
   res.render('transaction' , {
     "books" : bookName, 
     "users" : userName,
-    'per' : transaction
+    'per' : transaction 
   });
 }
 module.exports.create = (req, res) => {
@@ -55,10 +55,12 @@ module.exports.createPost = (req, res) => {
   var userId = db.get('users').find({name : user}).get('id').value();
   var bookId = db.get('books').find({title : book}).get('id').value();
   var id = shortId.generate();
+  var check = false;
   var value = {
     bookId : bookId , 
     userId : userId , 
-    id : id
+    id : id, 
+    isComplete : check
   }
   db.get('transaction').push(value).write();
   res.redirect('/transaction');
@@ -72,3 +74,13 @@ module.exports.remove =  (req, res) => {
   res.redirect('/transaction')
 }
 
+module.export.complete = (req, res) => {
+  var id = req.params.id;
+  var check = true;
+  db.get('transaction')
+    .find({id : id})
+    .assign({isComplete : true})
+    .value();
+  console.log(db.get('transaction').map('isComplete').value());
+  res.redirect('/transaction');
+}
