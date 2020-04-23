@@ -95,7 +95,27 @@ app.post('/books/edit/:id' , (req, res) => {
   res.redirect('/books');
 })
 
-app.get('/user')
+app.get('/users', (req, res) => {
+  var user = db.get('users').value();
+  res.render('user' , {
+    "users" : user
+  })
+})
+app.get('/users/create' , (req, res) => {
+  res.render('createUser');
+})
+app.post('/users/create' , (req, res) => {
+  var name = req.body.name;
+  var sdt = req.body.sdt;
+  var id = shortId.generate();
+  var value = {
+    name : name , 
+    sdt : sdt, 
+    id : id
+  }
+  db.get('users').push(value).write();
+  res.redirerct('/user');
+})
 
 
 
