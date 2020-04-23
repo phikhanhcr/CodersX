@@ -13,7 +13,7 @@
     {
       "title": "Chú Lính Chì",
       "desc": "Detective",
-      "id": "1PC51Bbv3"
+      "id": "-FvrWMOV5"
     }
   ],
   "users": [
@@ -32,22 +32,26 @@
     {
       "bookId": "hyVg7hujH",
       "userId": "o_f9_tw-g",
-      "id": "TV8E5jfoi"
+      "id": "TV8E5jfoi",
+      "isComplete": false
     },
     {
       "bookId": "JeD3UciCF",
       "userId": "nWXqefV9-",
-      "id": "2-Z8cwA0_"
+      "id": "2-Z8cwA0_",
+      "isComplete": false
     },
     {
       "bookId": "JeD3UciCF",
       "userId": "o_f9_tw-g",
-      "id": "opp3XQ11X"
+      "id": "opp3XQ11X",
+      "isComplete": false
     },
     {
-      "bookId": "1PC51Bbv3",
-      "userId": "o_f9_tw-g",
-      "id": "HKZ5A6Pdp"
+      "bookId": "-FvrWMOV5",
+      "userId": "nWXqefV9-",
+      "id": "dqG4za0-h",
+      "isComplete": false
     }
   ]
 }

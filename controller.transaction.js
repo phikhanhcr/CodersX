@@ -74,7 +74,7 @@ module.exports.remove =  (req, res) => {
   res.redirect('/transaction')
 }
 
-module.export.complete = (req, res) => {
+module.exports.complete = (req, res) => {
   var id = req.params.id;
   var check = true;
   db.get('transaction')
