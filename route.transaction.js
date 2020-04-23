@@ -38,7 +38,8 @@ router.get('/' , (req, res) => {
   }
   res.render('transaction' , {
     "books" : bookName, 
-    "users" : userName
+    "users" : userName,
+    'per' : transaction
   });
 })
 
@@ -47,7 +48,7 @@ router.get('/create' , (req, res) => {
   var books = db.get('books').map('title').value();
   res.render('transactionCreate' , {
     "users" : users ,
-    "books" : books
+    "books" : books 
   });
 })
 
@@ -66,6 +67,12 @@ router.post('/create' , (req, res) => {
   res.redirect('/transaction');
 })
 
-
+router.get('/:id' , (req, res) => {
+  var id = req.params.id;
+  db.get('transaction')
+    .remove({id : id})
+    .write();
+  res.redirect('/transaction')
+})
 
 module.exports = router;

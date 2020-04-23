@@ -25,24 +25,23 @@ html
       h3 User
       ul
         each item in users
-          li 
+          li.m-3 
             span= item
             span &nbsp
-            a(href="/books/") Delete
             span &nbsp
             span &nbsp
-            a(href="/books/edit/") Edit
             span= "->"
     .user(style="display:flex;flex-direction:column;align-items:center")
       h3 Books
       ul
         each items in books
-          li 
+          li.m-3 
             span= items
             span &nbsp
-            a(href="/books/") Delete
-            span &nbsp
-            span &nbsp
-            a(href="/books/edit/") Edit  
-        
+    .user(style="display:flex;flex-direction:column;align-items:center")
+      h3.mb-4 Option
+      each i in per
+        ul(style='list-style-type:none')
+          li
+            a(href="/transaction/" + i.id) Delete    
   script(src='https://button.glitch.me/button.js')
