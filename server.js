@@ -7,10 +7,13 @@ const express = require("express");
 const app = express();
 var pug = require("pug");
 var bodyParser = require("body-parser");
+var cookieParser = require('cookie-parser');
 
 var bookRouter = require('./route.book.js');
 var userRouter = require('./route.user.js');
 var transactionRouter = require('./route.transaction.js');
+var loginRouter = require('./router.login');
+var checkCookie = require('./validation/checkCookie');
 // our default array of dreams
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -19,6 +22,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.set("view engine", "pug");
 app.set("views", "./views");
+app.use(cookieParser());
 
 const dreams = [
   "Find and count some sheep",
@@ -41,9 +45,11 @@ app.get("/dreams", (request, response) => {
   response.json(dreams);
 });
 
-app.use('/books' , bookRouter);
-app.use('/users' , userRouter);
-app.use('/transaction' , transactionRouter);
+
+app.use('/books', checkCookie.checkCookie, bookRouter);
+app.use('/users', checkCookie.checkCookie, userRouter);
+app.use('/transaction', checkCookie.checkCookie, transactionRouter);
+app.use('/login', loginRouter);
 app.use(express.static('public'));
 // listen for requests :)
 app.listen(3000, () => {

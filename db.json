@@ -45,7 +45,9 @@
     {
       "name": "Sơn TInh",
       "sdt": "3154315",
-      "id": "e52Q6wPP0"
+      "id": "e52Q6wPP0",
+      "email": "onetwothree@gmail.com",
+      "pass": "123"
     }
   ],
   "transaction": [
