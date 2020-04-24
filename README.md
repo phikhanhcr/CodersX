@@ -31,3 +31,4 @@ Find out more [about Glitch](https://glitch.com/about).
 
 #### bài 15 , check admin ,  set a local variable named  'checkAdmin' and its value is user.isAdmin 
 if isAdmin !== true , checkAdmin ='none' => display:${checkAdmin} and vice versa
+#### bài 16, Lưu lại số lần login sai của 1 người dùng vào field wrongLoginCount để nếu họ nhập sai lần thứ 4 trở đi, hệ thống sẽ không check hash nữa mà báo lỗi luôn (cái này không phải là rate limit) brcypt hash password 
