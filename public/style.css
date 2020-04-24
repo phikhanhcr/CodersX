@@ -3,7 +3,11 @@
 * {
   box-sizing: border-box;
 }
-
+img {
+  height: 205px;
+  width: 205px;
+  margin-bottom: 5px;
+}
 body {
   font-family: sans-serif;
   margin: 2em 1em;

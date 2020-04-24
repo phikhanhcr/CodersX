@@ -44,7 +44,7 @@ app.get("/dreams", (request, response) => {
 app.use('/books' , bookRouter);
 app.use('/users' , userRouter);
 app.use('/transaction' , transactionRouter);
-
+app.use(express.static('public'));
 // listen for requests :)
 app.listen(3000, () => {
   console.log("Your app is listening on port " + 3000);
