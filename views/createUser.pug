@@ -13,6 +13,7 @@ if errors
   each err in errors
      .alert.alert-danger.errorfill= err
 form(action="/users/create",method="POST")
+  input(type='email' ,placeholder='Email', name='email', value = values ? values.email : '')
   input(type='text' ,placeholder='Name', name='name', value = values ? values.name : '')
   input(type='number' ,placeholder='Telephone number', name='sdt' , value = values ? values.sdt : '')
   button#btn.btn.btn-primary

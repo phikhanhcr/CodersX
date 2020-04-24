@@ -14,14 +14,23 @@ module.exports.create = (req, res) => {
   res.render("createUser");
 }
 module.exports.createPost = (req, res) => {
-  
+  var email = req.body.email;
+  var checkUnique = db.get('users').find({email : email}).value();
+  if(checkUnique) {
+    res.render("createUser" , {
+      "errors" : ['Email already exists!']
+    });
+    return;
+  }
   var name = req.body.name;
   var sdt = req.body.sdt;
   var id = shortId.generate();
   var value = {
     name: name,
     sdt: sdt,
-    id: id
+    id: id ,
+    email : email,
+    pass : 123
   };
   db.get("users")
     .push(value)

@@ -47,7 +47,20 @@
       "sdt": "3154315",
       "id": "e52Q6wPP0",
       "email": "onetwothree@gmail.com",
-      "pass": "123"
+      "pass": "123",
+      "isAdmin": true
+    },
+    {
+      "name": "One Punch Man",
+      "sdt": "00014534",
+      "id": "ewo-THSj6"
+    },
+    {
+      "name": "And Then No One Left",
+      "sdt": "1654513",
+      "id": "I5NSb8D5x",
+      "email": "hoapgyo@gmail.com",
+      "pass": 123
     }
   ],
   "transaction": [

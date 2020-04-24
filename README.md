@@ -28,3 +28,6 @@ Click `Show` in the header to see your app live. Updates to your code will insta
 Find out more [about Glitch](https://glitch.com/about).
 
 ( ᵔ ᴥ ᵔ )
+
+#### bài 15 , check admin , set a local variable which have name 'checkAdmin' and its value is user.isAdmin 
+if isAdmin !== true , checkAdmin ='none' => display:${checkAdmin} and vice versa
