@@ -6,6 +6,9 @@ module.exports.createUser = (req, res, next ) => {
   if(!req.body.sdt) {
     errors.push('Telephone is required!');
   }
+  if(req.body.name.length > 25) {
+    errors.push('Length must be less than 25!');
+  }
   if(errors.length) {
     res.render('createUser' , {
       'errors' : errors,
