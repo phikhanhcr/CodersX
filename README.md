@@ -29,5 +29,5 @@ Find out more [about Glitch](https://glitch.com/about).
 
 ( ᵔ ᴥ ᵔ )
 
-#### bài 15 , check admin ,  set a local variable named 'checkAdmin' and its value is user.isAdmin 
+#### bài 15 , check admin ,  set a local variable named  'checkAdmin' and its value is user.isAdmin 
 if isAdmin !== true , checkAdmin ='none' => display:${checkAdmin} and vice versa

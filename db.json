@@ -47,8 +47,9 @@
       "sdt": "3154315",
       "id": "e52Q6wPP0",
       "email": "onetwothree@gmail.com",
-      "pass": "123",
-      "isAdmin": true
+      "pass": "$2b$10$RSG3m.ja4Fr0FWEL4/4x7ueXWyU12nFdkaOpgZdQifly2YtHdjBeC",
+      "isAdmin": true,
+      "wrongLoginCount": 0
     },
     {
       "name": "One Punch Man",
@@ -60,7 +61,24 @@
       "sdt": "1654513",
       "id": "I5NSb8D5x",
       "email": "hoapgyo@gmail.com",
-      "pass": 123
+      "pass": "$2b$10$RSG3m.ja4Fr0FWEL4/4x7ueXWyU12nFdkaOpgZdQifly2YtHdjBeC",
+      "wrongLoginCount": 0
+    },
+    {
+      "name": "The King of Kingdom",
+      "sdt": "03164152154",
+      "id": "B8hvzS-7X",
+      "email": "hoangtugio@gmail.com",
+      "pass": "$2b$10$RSG3m.ja4Fr0FWEL4/4x7ueXWyU12nFdkaOpgZdQifly2YtHdjBeC",
+      "wrongLoginCount": 0
+    },
+    {
+      "name": "LeeSin",
+      "sdt": "014661",
+      "id": "TsouL4ohR",
+      "email": "khabang@gmail.com",
+      "pass": "$2b$10$RSG3m.ja4Fr0FWEL4/4x7ueXWyU12nFdkaOpgZdQifly2YtHdjBeC",
+      "wrongLoginCount": 0
     }
   ],
   "transaction": [

@@ -5,19 +5,19 @@ require('dotenv').config();
 // but feel free to use whatever libraries or frameworks you'd like through `package.json`.
 const express = require("express");
 const app = express();
-var pug = require("pug");
 var bodyParser = require("body-parser");
 var cookieParser = require('cookie-parser');
+
 
 var bookRouter = require('./route.book.js');
 var userRouter = require('./route.user.js');
 var transactionRouter = require('./route.transaction.js');
 var loginRouter = require('./router.login');
 var checkCookie = require('./validation/checkCookie');
-// our default array of dreams
+
+
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
-
 // parse application/json
 app.use(bodyParser.json());
 app.set("view engine", "pug");

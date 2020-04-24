@@ -2,6 +2,13 @@ var db = require("./db.js");
 var pug = require("pug");
 var shortId = require("shortid");
 var removeAccents = require("./removeAccents.js");
+var md5 = require('md5');
+
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+const myPlaintextPassword = 's0/\/\P4$$w0rD';
+const someOtherPlaintextPassword = 'not_bacon';
+
 
 module.exports.index = (req, res) => {
   var user = db.get("users").value();
@@ -13,7 +20,7 @@ module.exports.index = (req, res) => {
 module.exports.create = (req, res) => {
   res.render("createUser");
 }
-module.exports.createPost = (req, res) => {
+module.exports.createPost = async (req, res) => {
   var email = req.body.email;
   var checkUnique = db.get('users').find({email : email}).value();
   if(checkUnique) {
@@ -25,12 +32,13 @@ module.exports.createPost = (req, res) => {
   var name = req.body.name;
   var sdt = req.body.sdt;
   var id = shortId.generate();
+  const password = await bcrypt.hashSync(myPlaintextPassword, saltRounds);
   var value = {
     name: name,
     sdt: sdt,
     id: id ,
     email : email,
-    pass : 123
+    pass : password
   };
   db.get("users")
     .push(value)
