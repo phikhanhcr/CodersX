@@ -1,6 +1,6 @@
 // server.js
 // where your node app starts
-
+require('dotenv').config();
 // we've started you off with Express (https://expressjs.com/)
 // but feel free to use whatever libraries or frameworks you'd like through `package.json`.
 const express = require("express");
@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.set("view engine", "pug");
 app.set("views", "./views");
-app.use(cookieParser());
+app.use(cookieParser(process.env.SECRET_SIGNED_COOKIES));
 
 const dreams = [
   "Find and count some sheep",
