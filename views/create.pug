@@ -9,10 +9,12 @@ head
   
 header
   h1 Child's Dream  
-
+if errors
+  each err in errors
+     .alert.alert-danger.errorfill= err
 form(action="/books/create",method="POST")
-  input(type='text' ,placeholder='Title', name='title')
-  input(type='text' ,placeholder='Description', name='desc')
+  input(type='text' ,placeholder='Title', name='title' , value=values ? values.title : '')
+  input(type='text' ,placeholder='Description', name='desc', value=values ? values.desc : '')
   button#btn.btn.btn-primary
     | Create
 script(src='https://button.glitch.me/button.js')

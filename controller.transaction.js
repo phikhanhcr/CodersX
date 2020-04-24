@@ -34,10 +34,21 @@ module.exports.index = (req, res) => {
       }
     })
   }
+  var arr = [];
+  // nhóm từng giá trị lại thành 1 object để chia bảng 
+  for(var i = 0 ; i < transaction.length ; i++ ) {
+    arr[i] = {
+      name : bookName[i], 
+      users : userName[i],
+      per : transaction[i] // isComplete and Circumstance
+    }
+  }
+  //console.log(arr);
   res.render('transaction' , {
     "books" : bookName, 
     "users" : userName,
-    'per' : transaction 
+    'per' : transaction,
+    "arr" : arr
   });
 }
 module.exports.create = (req, res) => {
@@ -66,7 +77,7 @@ module.exports.createPost = (req, res) => {
   res.redirect('/transaction');
 }
 
-module.exports.remove =  (req, res) => {
+module.exports.remove = (req, res) => {
   var id = req.params.id;
   db.get('transaction')
     .remove({id : id})

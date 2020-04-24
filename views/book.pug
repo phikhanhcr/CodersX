@@ -2,7 +2,8 @@ extends ./commom.pug
 block content
   header
     h1 Child's Dream - BOOK
-    img(src='/book.jpg')
+    a( href='/book.jpg', target='_blank')
+      img(src='/book.jpg')
     br
     a.btn.btn-primary(href='/books/create') Create
     br
@@ -14,15 +15,20 @@ block content
       button(href="/books").btn.btn-primary
         | Show All  
     br
-    ul#todo
+    table.table
+      tr
+        th Title
+        th Description
+        th Option
+        th Option
       each item in books
-        li 
-          span= item.title 
-          span &nbsp
-          a(href="/books/" + item.id) Delete
-          span &nbsp
-          span &nbsp
-          a(href="/books/edit/" + item.id) Edit
+        tr
+          td= item.title
+          td= item.desc
+          td
+            a.btn.btn-secondary(href="/books/" + item.id) Delete
+          td
+            a.btn.btn-primary(href="/books/edit/" + item.id) Edit
     script(src='https://button.glitch.me/button.js')
 
 

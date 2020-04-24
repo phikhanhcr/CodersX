@@ -14,6 +14,7 @@ module.exports.create = (req, res) => {
   res.render("createUser");
 }
 module.exports.createPost = (req, res) => {
+  
   var name = req.body.name;
   var sdt = req.body.sdt;
   var id = shortId.generate();

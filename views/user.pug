@@ -2,7 +2,8 @@ extends ./commom.pug
 block content
   header
     h1 Child's Dream - User
-    img(src='/user.png')
+    a( href='/user.png', target='_blank')
+      img(src='/user.png')
     br
     a.btn.btn-primary(href='/users/create') Create
     br
@@ -14,15 +15,22 @@ block content
       button(href="/users").btn.btn-primary
         | Show All  
     br
-    ul#todo
+    table.table(style="text-align:center")
+      tr
+        td Avatar
+        th Name
+        th Telephone
+        th Option
+        th Option
       each item in users
-        li 
-          span= item.name 
-          span &nbsp
-          a(href="/users/" + item.id) Delete
-          span &nbsp
-          span &nbsp
-          a(href="/users/edit/" + item.id) Edit
+        tr
+          td
+          td= item.name
+          td= item.sdt
+          td
+            a.btn.btn-secondary(href="/users/" + item.id) Delete
+          td
+            a.btn.btn-primary(href="/users/edit/" + item.id) Edit
     script(src='https://button.glitch.me/button.js')
 
 

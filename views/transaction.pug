@@ -2,44 +2,27 @@ extends ./commom.pug
 block content
   header
     h1 Child's Dream - Transaction
-  img(src='/2.jpg')
+  a( href='/2.jpg', target='_blank')
+    img(src='/2.jpg')
   br
   a.btn.btn-primary(href='/transaction/create') Create
   br
   br
-  .d-flex
-    .user(style="display:flex;flex-direction:column;align-items:center")
-      h3 User
-      ul
-        each item in users
-          li.m-3 
-            span= item
-            span &nbsp
-            span &nbsp
-            span &nbsp
-            span= "--->"
-    .user(style="display:flex;flex-direction:column;align-items:center")
-      h3 Books
-      ul
-        each items in books
-          li.m-3 
-            span= items
-            span &nbsp
-    .user(style="display:flex;flex-direction:column;align-items:center")
-      h3.mb-4 Option
-      each i in per
-        ul(style='list-style-type:none')
-          li
-            a(href="/transaction/" + i.id) Delete
-    .user(style="display:flex;flex-direction:column;align-items:center").pt-1
-      h4.mb-4.ml-5 isComplete
-      each i in per
-        ul(style='list-style-type:none')
-          li
-            a(href="/transaction/" + i.id + '/complete') Complete
-    .user(style="display:flex;flex-direction:column;align-items:center").pt-1
-      h4.mb-4.ml-5 Circumstance
-      each i in per
-        ul(style='list-style-type:none')
-          li= i.isComplete 
+
+  table.table
+    tr
+      th User
+      th Books
+      th Option
+      th isComplete
+      th Circumstance
+    each item in arr
+      tr
+        td= item.users
+        td= item.name
+        td
+          a.btn.btn-secondary(href="/transaction/" + item.per.id) Delete
+        td
+          a.btn.btn-primary(href="/transaction/" + item.per.id + '/complete') Complete
+        td(style="font-size:18px;color:red;font-weight:500")= item.per.isComplete
   script(src='https://button.glitch.me/button.js')

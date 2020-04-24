@@ -3,10 +3,12 @@ var router = express.Router();
 
 var controller = require('./controller.book.js');
 
+var validation = require('./validation/checkInput');
+
 router.get("/", controller.index);
 
 router.get("/create", controller.create);
-router.post("/create", controller.createPost);
+router.post("/create", validation.createBook ,controller.createPost);
 
 router.get("/search", controller.search);
 
