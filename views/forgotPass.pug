@@ -1,0 +1,19 @@
+doctype html
+head
+  meta(http-equiv='X-UA-Compatible', content='IE=edge')
+  meta(name='viewport', content='width=device-width, initial-scale=1')
+  meta(name='description', content='A cool thing made with Glitch')
+  script(src='https://kit.fontawesome.com/05ef113fe5.js', crossorigin='anonymous')
+  link#favicon(rel='icon', href='https://glitch.com/edit/favicon-app.ico', type='image/x-icon')
+  link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css')
+body
+  .container
+    .wrapper-forgot(style="display:flex;flex-direction:column;justify-content:center;height:700px;align-items:center")
+      i.fas.fa-heartbeat.fa-7x
+      p Enter your email and we'll reset your password , check your email to get your new password
+      if errors
+        each err in errors
+          .alert.alert-danger.errorfill= err
+      form(method="POST").form-group
+        input.form-control(type="email" , name='email' , placeholder="Enter your email here !")
+        button.btn.btn-primary.ml-5.mt-2 Submit
