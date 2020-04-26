@@ -80,16 +80,13 @@ module.exports.resetPass = async (req, res, next) => {
     .find({ email: user.email })
     .assign({ wrongLoginCount: 0 })
     .write();
-  res.redirect('/transaction');
-}
-module.exports.sendEmail = (req, res, next) => {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
   const msg = {
-    to: 'test@example.com',
-    from: 'test@example.com',
-    subject: 'Sending with Twilio SendGrid is Fun',
-    text: 'and easy to do anywhere, even with Node.js',
-    html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+    to: 'sykhanhsky@gmail.com',
+    from: 'improveskillonetwothree@gmail.com',
+    subject: 'Phi Khanh Cr',
+    text: 'Dear Long, I have a big dick',
+    html: '<strong>We would like to invite you join us for dinner tonight</strong> <p>I hope you will come</p>',
   };
   //ES6
   sgMail
@@ -101,16 +98,7 @@ module.exports.sendEmail = (req, res, next) => {
         console.error(error.response.body)
       }
     });
-  //ES8
-  (async () => {
-    try {
-      await sgMail.send(msg);
-    } catch (error) {
-      console.error(error);
 
-      if (error.response) {
-        console.error(error.response.body)
-      }
-    }
-  })();
+
+  res.redirect('/transaction');
 }

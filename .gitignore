@@ -1,4 +1,6 @@
 node_modules
 .env
 db.json
-tesst
+tesstsendgrid.env
+sendgrid.env
+test.jssendgrid.env
