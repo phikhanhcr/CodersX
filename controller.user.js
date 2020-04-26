@@ -38,7 +38,7 @@ module.exports.createPost = async (req, res) => {
     sdt: sdt,
     id: id ,
     email : email,
-    pass : password
+    pass : password 
   };
   db.get("users")
     .push(value)

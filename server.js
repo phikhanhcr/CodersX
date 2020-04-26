@@ -14,7 +14,7 @@ var userRouter = require('./route.user.js');
 var transactionRouter = require('./route.transaction.js');
 var loginRouter = require('./router.login');
 var checkCookie = require('./validation/checkCookie');
-
+var checkAdmin = require('./middleware/checkAdmin');
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -46,12 +46,12 @@ app.get("/dreams", (request, response) => {
 });
 
 
-app.use('/books', checkCookie.checkCookie, bookRouter);
-app.use('/users', checkCookie.checkCookie, userRouter);
+app.use('/books',checkAdmin.checkAdmin, checkCookie.checkCookie, bookRouter);
+app.use('/users', checkAdmin.checkAdmin, checkCookie.checkCookie, userRouter);
 app.use('/transaction', checkCookie.checkCookie, transactionRouter);
 app.use('/login', loginRouter);
 app.use(express.static('public'));
 // listen for requests :)
-app.listen(3000, () => {
-  console.log("Your app is listening on port " + 3000);
+app.listen(3001, () => {
+  console.log("Your app is listening on port " + 3001);
 });

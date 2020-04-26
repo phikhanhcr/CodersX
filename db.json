@@ -79,6 +79,28 @@
       "email": "khabang@gmail.com",
       "pass": "$2b$10$RSG3m.ja4Fr0FWEL4/4x7ueXWyU12nFdkaOpgZdQifly2YtHdjBeC",
       "wrongLoginCount": 0
+    },
+    {
+      "name": "Lucy",
+      "sdt": "5454141",
+      "id": "1pRuxCyog",
+      "email": "lucy@gmail.com",
+      "pass": "$2b$10$w9BTZ2T.XDCTFpPgdRtENON10qQMheSbbKgpy9Fjc0hw8/24MC1m6"
+    },
+    {
+      "name": "nancy",
+      "sdt": "41347",
+      "id": "DmSJ6pNfP",
+      "email": "nancy@gmail.com",
+      "pass": "$2b$10$tX/.HOfv7ZbK47TZgkkdXuMn33tyYNOQtAeoFg60mADD18SkquC3W",
+      "avatar": "32849480_193665974588677_5847275159467065344_n.jpg"
+    },
+    {
+      "name": "No Name",
+      "sdt": "87461",
+      "id": "WLFKLszPZ",
+      "email": "hu@gmail.com",
+      "pass": "$2b$10$HP.0UA.yQazLgOmLFBy.N.ivwQ2w1MFuWcSnKC6W2qYUgqsrpUVEa"
     }
   ],
   "transaction": [

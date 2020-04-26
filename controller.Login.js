@@ -32,7 +32,11 @@ module.exports.loginPost = async (req, res, next) => {
   console.log(check);
   
   if(check != true) {
-    user.wrongLoginCount ++;
+    // update each time wrong password , count++ , >= 3 => lock
+    db.get('users')
+      .find({email : user.email})
+      .assign({wrongLoginCount : user.wrongLoginCount + 1})
+      .write()
     res.render('login' , {
       "errors" : ["Wrong password, try again!"],
       "values" : req.body
