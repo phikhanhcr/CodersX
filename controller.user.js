@@ -13,7 +13,7 @@ const myPlaintextPassword = '123';
 module.exports.index = (req, res) => {
   var user = db.get("users").value();
   res.render("user", {
-    users: user
+    "users": user
   });
 }
 
@@ -32,14 +32,17 @@ module.exports.createPost = async (req, res) => {
   var name = req.body.name;
   var sdt = req.body.sdt;
   var id = shortId.generate();
+  
   const password = await bcrypt.hashSync(myPlaintextPassword, saltRounds);
   var value = {
     name: name,
     sdt: sdt,
     id: id ,
     email : email,
-    pass : password 
+    pass : password ,
+    avatar : '/' + req.file.path.split('/').slice(1).join('/')
   };
+  console.log(value.avatar);
   db.get("users")
     .push(value)
     .write();
@@ -59,7 +62,7 @@ module.exports.search =  (req, res) => {
       );
     });
   res.render("user", {
-    users: list
+    "users": list
   });
 }
 
@@ -83,3 +86,6 @@ module.exports.editPost = (req, res) => {
     .value();
   res.redirect("/users");
 }
+
+// view books
+// pagination

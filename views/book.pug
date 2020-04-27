@@ -1,34 +1,119 @@
 extends ./commom.pug
 block content
   header
-    h1 Child's Dream - BOOK
-    a( href='/book.jpg', target='_blank')
-      img(src='/book.jpg')
-    br
-    a.btn.btn-primary(href='/books/create') Create
-    br
-    br
-    form(action="/books/search",method="GET")
-      input(type='text', placeholder='Search in here', name='search')
-      button#btn.btn.btn-primary
-        | Search
-      button(href="/books").btn.btn-primary
-        | Show All  
-    br
-    table.table
-      tr
-        th Title
-        th Description
-        th Option
-        th Option
+  h1 Child's Dream - BOOK
+  a( href='/book.jpg', target='_blank')
+    img.bookAvatar(src='/book.jpg')
+  br
+  a.btn.btn-primary(href='/books/create') Create
+  br
+  br
+  form(action="/books/search" , method="GET").form-group.d-flex
+    input(type='text', placeholder='Search here', name="title", style="width:200px;margin-right:30px").form-control
+    button(class="btn btn-primary") Search
+  a(href="/books").btn.btn-primary
+    | Show All  
+  br
+  .books
+    .row
       each item in books
-        tr
-          td= item.title
-          td= item.desc
-          td
-            a.btn.btn-secondary(href="/books/" + item.id) Delete
-          td
-            a.btn.btn-primary(href="/books/edit/" + item.id) Edit
-    script(src='https://button.glitch.me/button.js')
+        .col-lg-3.col-sm-6.col-12.wrapper-row
+          .wrapper-book
+            .img-book
+            .details
+              h4= item.title
+              p= item.desc
+              .more-option
+                a.btn.btn-secondary(href="/books/" + item.id) Delete
+                a.btn.btn-light(href="/books/edit/" + item.id) Edit
+                a.btn.btn-primary(href="/books/view/" + item.id) View
+  nav(aria-label='Page navigation example')
+    ul.pagination
+      li.page-item
+        a.page-link#pre Previous
+      li.page-item
+        a.page-link.page-number(href=`/books?page=${fixed1}`)= fixed1
+      li.page-item(style=`display:${display}`)
+        a.page-link.page-number( href=`/books?page=${fixed2}`)= fixed2
+      li.page-item(style=`display:${display}`)
+        a.page-link.page-number(href=`/books?page=${fixed3}`)= fixed3
+      li.page-item
+        a.page-link#next Next
 
 
+  script.
+    var next = document.getElementById('next');
+    next.addEventListener('click', onClickNext);
+    var pre = document.getElementById('pre');
+    pre.addEventListener('click', onClickPre);
+    var total = parseInt(document.getElementById('total').innerHTML);
+    // so page
+    var perPage = Math.floor(total / 8);
+
+    // bien page 1 , 2 , 3 ban dau
+    var arr = Array.from(document.getElementsByClassName('page-number'));
+    var arrNumber = arr.map(ele => {
+    return parseInt(ele.text);
+    }) // [1,2,3]
+    for (var i = 0; i < 3; i++) {
+    arr[i].setAttribute('href', `/books?page=${arrNumber[i]}`);
+    }
+    function onClickNext() {
+    var arr = Array.from(document.getElementsByClassName('page-number'));
+    var arrNumber = arr.map(ele => {
+    return parseInt(ele.text);
+    }) // [1,2,3]
+    if (arrNumber[0] == 13) {
+    arrNumber[1].text = "";
+    arrNumber[2].text = "";
+    return;
+    }
+    var newValue = arrNumber.map(ele => {
+    return ele + 3;
+    })
+    console.log(newValue);
+    for (var i = 0; i < 3; i++) {
+      if (newValue[0] == 13) {
+        arr[0].text = 13;
+        arr[1].text = "";
+        arr[2].text = "";
+        arr[0].setAttribute('href', `/books?page=${13}`);
+
+        arr[2].parentNode.setAttribute('style' , 'display:none');
+        arr[1].parentNode.setAttribute('style' , 'display:none');
+      return;
+    }
+    arr[i].text = newValue[i];
+    arr[i].setAttribute('href', `/books?page=${newValue[i]}`);
+    }
+    }
+    function onClickPre () {
+    var arr = Array.from(document.getElementsByClassName('page-number'));
+    console.log(arr[0].text);
+    if(arr[0].text == 13 ){
+    arr[1].text = 14;
+    arr[2].text = 15;
+    }
+    var arrNumber = arr.map(ele => {
+      return parseInt(ele.text);
+    })
+    console.log(arrNumber);
+    if (arrNumber[0] == 1) {
+      return;
+    }
+    var newValue = arrNumber.map(ele => {
+    return ele - 3;
+    })
+    console.log(newValue)
+    for (var i = 0; i < 3; i++) {
+    arr[i].setAttribute('href', `/books?page=${newValue[i]}`);
+    if (newValue[i] <= 0  ) {
+    return;
+    }
+    if(newValue[0]  == 10 ){
+      arr[2].parentNode.setAttribute('style' , 'display:block');
+      arr[1].parentNode.setAttribute('style' , 'display:block');
+    }
+    arr[i].text = newValue[i];
+    }
+    }

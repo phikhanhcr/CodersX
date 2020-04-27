@@ -1,0 +1,14 @@
+extends ./commom.pug
+block content
+  .viewOne
+  .viewOne-book
+    .img-book
+    .infor-book
+      .title
+        h3= book.title
+      .desc
+        i= book.desc
+      .price
+        h4= book.price + " $"
+      .btn
+        a.btn.btn-primary(href='#') Get to Cart

@@ -32,5 +32,6 @@ router.get("/edit/:id", controller.edit);
 
 router.post("/edit/:id", controller.editPost);
 
+router.get("/view/:id", controller.view);
 
 module.exports = router;

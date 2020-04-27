@@ -12,11 +12,11 @@ header
 if errors
   each err in errors
      .alert.alert-danger.errorfill= err
-form(action="/users/create",method="POST")
+form(action="/users/create",method="POST" , enctype="multipart/form-data")
   input(type='email' ,placeholder='Email', name='email', value = values ? values.email : '')
   input(type='text' ,placeholder='Name', name='name', value = values ? values.name : '')
   input(type='number' ,placeholder='Telephone number', name='sdt' , value = values ? values.sdt : '')
-  
+  input(type="file" , name="avatar")
   button#btn.btn.btn-primary
     | Create
 script(src='https://button.glitch.me/button.js')

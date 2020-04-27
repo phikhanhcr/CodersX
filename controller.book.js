@@ -5,8 +5,48 @@ var removeAccents = require("./removeAccents.js");
 
 module.exports.index = (req, res) => {
   var books = db.get("books").value();
+  var page = req.query.page || 1;
+  var perPage = 8;
+  var start = (page - 1) * perPage;
+  var end = page * perPage;
+  var currentPage = req.query.page ? req.query.page : 1;
+  var numberFixed = parseInt(currentPage);
+
+  var newObj = {};
+  var display = "block";
+  if (currentPage == 1 || currentPage == 4 || currentPage == 7 || currentPage == 10) {
+    newObj = {
+      first: numberFixed,
+      second: numberFixed + 1,
+      third: numberFixed + 2
+    }
+  } else if (currentPage == 2 || currentPage == 5 || currentPage == 8 || currentPage == 11) {
+    newObj = {
+      first: numberFixed - 1,
+      second: numberFixed,
+      third: numberFixed + 1
+    }
+  } else if (currentPage == 3 || currentPage == 6 || currentPage == 9 || currentPage == 12) {
+    newObj = {
+      first: numberFixed - 2,
+      second: numberFixed - 1,
+      third: numberFixed
+    }
+  } else if (currentPage == 13) {
+    //console.log(currentPage);
+    newObj = {
+      first: numberFixed,
+      second: "",
+      third: ""
+    }
+    display = "none";
+  }
   res.render("book", {
-    books: books
+    "books": books.slice(start, end),
+    "fixed1": newObj.first,
+    "fixed2": newObj.second,
+    "fixed3": newObj.third,
+    "display" : display
   });
 };
 module.exports.create = (req, res) => {
@@ -29,8 +69,12 @@ module.exports.createPost = (req, res) => {
 };
 
 module.exports.search = (req, res) => {
-  var search = req.query.search;
-  var list = db
+  var search = req.query.title;
+  var page = req.query.page || 1;
+  var perPage = 8;
+  var start = (page - 1) * perPage;
+  var end = page * perPage;
+  var books = db
     .get("books")
     .value()
     .filter(ele => {
@@ -41,11 +85,11 @@ module.exports.search = (req, res) => {
       );
     });
   res.render("book", {
-    books: list
+    "books": books.slice(start, end)
   });
 };
 
-module.exports.remove =  (req, res) => {
+module.exports.remove = (req, res) => {
   var id = req.params.id;
   db.get("books")
     .remove({ id: id })
@@ -64,4 +108,12 @@ module.exports.editPost = (req, res) => {
     .assign({ title: value })
     .value();
   res.redirect("/books");
+}
+
+module.exports.view = (req, res , next) => {
+  var id = req.params.id;
+  var book = db.get('books').find({id : id}).value();
+  res.render('viewOne' , {
+    "book" : book
+  });
 }

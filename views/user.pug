@@ -24,7 +24,8 @@ block content
         th Option
       each item in users
         tr
-          td
+          td.avatar-user
+            img(src=item.avatar, width=64)
           td= item.name
           td= item.sdt
           td
