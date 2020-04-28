@@ -46,7 +46,8 @@ module.exports.index = (req, res) => {
     "fixed1": newObj.first,
     "fixed2": newObj.second,
     "fixed3": newObj.third,
-    "display" : display
+    "display" : display,
+    "currentPage" : currentPage
   });
 };
 module.exports.create = (req, res) => {
@@ -112,8 +113,10 @@ module.exports.editPost = (req, res) => {
 
 module.exports.view = (req, res , next) => {
   var id = req.params.id;
+  var pageCurrent = req.query.page ? req.query.page : 1; 
   var book = db.get('books').find({id : id}).value();
   res.render('viewOne' , {
-    "book" : book
+    "book" : book ,
+    "pageCurrent" : pageCurrent
   });
 }

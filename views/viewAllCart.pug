@@ -1,0 +1,33 @@
+extends ./commom.pug
+block content
+  .container
+    h3 Buy something
+    br
+    br
+    table.table(style="text-align:center")#table
+      tr
+        th Choose
+        th Name
+        th Price
+        th Amount
+        th Money
+        th Option
+      each item in books
+        tr
+          td 
+            input(type="checkbox").checkbox
+          td= item.title
+          td= item.price
+          td= item.amount
+          td.total= item.money
+          td
+            a.btn.btn-secondary(href="#") Delete
+    span Total Money
+    span &nbsp
+    span &nbsp
+    span &nbsp
+    p#total
+  br
+  a.btn.btn-primary(href="/cart/hire" , style="position: absolute;right:19%") Hire
+
+  

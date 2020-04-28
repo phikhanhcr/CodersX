@@ -11,4 +11,4 @@ block content
       .price
         h4= book.price + " $"
       .btn
-        a.btn.btn-primary(href='#') Get to Cart
+        a.btn.btn-primary(href='/cart/add/' + book.id + "?page=" + pageCurrent) Add to Cart

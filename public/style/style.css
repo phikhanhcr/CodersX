@@ -93,6 +93,7 @@ body {
 }
 .userUpdate .updateAvatar {
   flex-grow: 1;
+  
 }
 .userUpdate .formUpdateAvatar {
   flex-grow: 7;

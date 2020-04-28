@@ -48,7 +48,8 @@ module.exports.index = (req, res) => {
     "books" : bookName, 
     "users" : userName,
     'per' : transaction,
-    "arr" : arr
+    "arr" : arr,
+    "stt" : 0
   });
 }
 module.exports.create = (req, res) => {

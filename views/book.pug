@@ -26,7 +26,7 @@ block content
               .more-option
                 a.btn.btn-secondary(href="/books/" + item.id) Delete
                 a.btn.btn-light(href="/books/edit/" + item.id) Edit
-                a.btn.btn-primary(href="/books/view/" + item.id) View
+                a.btn.btn-primary(href="/books/view/" + item.id + "?page=" + currentPage) View
   nav(aria-label='Page navigation example')
     ul.pagination
       li.page-item

@@ -23,7 +23,13 @@ body
           a.nav-link(href='/users') User
         li.nav-item
           a.nav-link(href='/transaction') Transaction
-        li(style=`display:${checkAdmin}`).nav-item
+        li.nav-item
           a.nav-link(href='/books') Book
+        li.nav-item
+          a.nav-link(href='/cart/viewall') 
+            span Cart
+            span &nbsp
+            span &nbsp
+            span= totalAmount
   .container
     block content

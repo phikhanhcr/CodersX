@@ -14,7 +14,9 @@ var transactionRouter = require('./route.transaction.js');
 var loginRouter = require('./router.login');
 var checkCookie = require('./validation/checkCookie');
 var checkAdmin = require('./middleware/checkAdmin');
-
+var checkSessionId = require('./validation/checkSession');
+var cartRouter = require('./route.cart');
+var checkTotalAmountBook = require('./middleware/checkAmountBook');
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -23,7 +25,8 @@ app.use(bodyParser.json());
 app.set("view engine", "pug");
 app.set("views", "./views");
 app.use(cookieParser(process.env.SECRET_SIGNED_COOKIES));
-
+app.use(checkSessionId);
+app.use(checkTotalAmountBook);
 //controller.sendEmail();
 const dreams = [
   "Find and count some sheep",
@@ -47,10 +50,12 @@ app.get("/dreams", (request, response) => {
 });
 
 
-app.use('/books',checkAdmin.checkAdmin, checkCookie.checkCookie, bookRouter);
+app.use('/books' ,checkCookie.checkCookie , bookRouter);
 app.use('/users', checkAdmin.checkAdmin, checkCookie.checkCookie, userRouter);
 app.use('/transaction', checkCookie.checkCookie, transactionRouter);
 app.use('/login', loginRouter);
+
+app.use('/cart' , cartRouter);
 app.use(express.static('public'));
 // listen for requests :)
 app.listen(3001, () => {
