@@ -35,3 +35,7 @@ if isAdmin !== true , checkAdmin ='none' => display:${checkAdmin} and vice versa
 
 #### Unit 18 , Enviroment variables , create a sendGrid Account
 Get more information [npm-sendgrid/mail](https://www.npmjs.com/package/@sendgrid/mail)
+
+***Unit 21 - File Upload***
+> By using cloudinary , I creaeted view User's profile endpoint , Admin can
+> update information , change avatar , and will be able to see avatar clearly  
