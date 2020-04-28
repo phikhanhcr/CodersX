@@ -15,6 +15,7 @@ var loginRouter = require('./router.login');
 var checkCookie = require('./validation/checkCookie');
 var checkAdmin = require('./middleware/checkAdmin');
 
+
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json

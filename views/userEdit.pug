@@ -6,19 +6,26 @@ head
   link#favicon(rel='icon', href='https://glitch.com/edit/favicon-app.ico', type='image/x-icon')
   link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css')
   link(rel='stylesheet', href='/style.css')
+  link(rel='stylesheet', href='/style/style.css')
   
 header
+.container
   h1 Child's Dream  - Change User's name
-br
-a.btn.btn-primary(href='/users') Get back
-br
-br
-form(method="POST")
-  input(type='text', placeholder='Which name do you want it to be ? ', name='edit')
-  button#btn.btn.btn-primary
-    | Ok anh ơi
+  br
+  a.btn.btn-primary(href='/users') Get back
+  br
+  br
+  .userUpdate
+    .updateAvatar
+      img(src=`${oldAvatar}`).width-120
+    .formUpdateAvatar
+      form(method="POST",  enctype="multipart/form-data")
+        input(type='text', placeholder=`${oldName}`, name='edit')
+        label(for="updateAvat") Update Avatar
+        input#updateAvat(type="file", name="avatar")
+        button#btn.btn.btn-primary
+          | Ok anh ơi
 
-
-script(src='https://button.glitch.me/button.js')
+  script(src='https://button.glitch.me/button.js')
 
 

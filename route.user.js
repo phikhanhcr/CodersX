@@ -18,6 +18,11 @@ router.get("/:id", controller.remove);
 
 router.get("/edit/:id", controller.edit);
 
-router.post("/edit/:id", controller.editPost);
+router.post("/edit/:id", upload.single('avatar') ,controller.editPost);
+
+//router.get("/updateAvatar", controller.updateAvatar);
+
+// 1 . upload succesfully
+// 2 . update Profile
 
 module.exports = router;

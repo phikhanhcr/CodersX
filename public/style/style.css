@@ -83,3 +83,17 @@ body {
   align-items: center;
   justify-content: space-evenly;
 }
+/* edit avatar */
+.userUpdate {
+  display: flex;
+}
+.userUpdate .updateAvatar img {
+  height: 250px;
+  width: 200px;
+}
+.userUpdate .updateAvatar {
+  flex-grow: 1;
+}
+.userUpdate .formUpdateAvatar {
+  flex-grow: 7;
+}

@@ -1,0 +1,7 @@
+extends ./commom.pug
+block content
+  form(action="/user/updateAvatar", method="POST" , enctype="multipart/form-data")
+    input(type="file" , name="avatar")
+    button.btn.btn-primary Submit
+
+  img(src=url)
