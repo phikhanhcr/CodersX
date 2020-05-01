@@ -39,3 +39,10 @@ Get more information [npm-sendgrid/mail](https://www.npmjs.com/package/@sendgrid
 ***Unit 21 - File Upload***
 > By using cloudinary , I creaeted view User's profile endpoint , Admin can
 > update information , change avatar , and will be able to see avatar clearly  
+
+*** Unit 22 : Session : check SessionId 
+> (false , create new and put it in Database)
+> (true  , next)
+
+*** Unit 23 , 24 : MongoDb
+> save()
