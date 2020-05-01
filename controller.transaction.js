@@ -2,21 +2,23 @@ var db = require("./db.js");
 var pug = require("pug");
 var shortId = require("shortid");
 var removeAccents = require("./removeAccents.js");
-
-module.exports.index = (req, res) => {
-  var transaction = db.get('transaction').value();
-  
+var Transaction = require('./models/trasaction.model');
+var User = require('./models/user.model');
+var Book = require('./models/book.model');
+module.exports.index = async (req, res) => {
+  //var transaction = db.get('transaction').value();
+  var transaction = await Transaction.find(); // []
   // 1 . find userId in transaction
   var usersId = transaction.map(ele => {    // []  array Id of db.get('transaction');
     return ele.userId;
   })
   // 2 . get all object in user
-  var arrayUser = db.get('users').value();  // []
+  var arrayUser = await User.find();
   var userName = [];
   // filter based on id
   for(var i = 0 ; i < usersId.length ; i++ ) {
     arrayUser.filter(ele => {
-      if(ele.id == usersId[i]) {
+      if(ele._id == usersId[i]) {
         userName.push(ele.name);
       }
     })
@@ -25,7 +27,7 @@ module.exports.index = (req, res) => {
   var booksId = transaction.map(ele => {    // []  array Id of db.get('transaction');
     return ele.bookId;
   })
-  var arrayBook = db.get('books').value();  // []
+  var arrayBook =  await Book.find(); // []
   var bookName = [];
   for(var i = 0 ; i < booksId.length ; i++ ) {
     arrayBook.filter(ele => {
@@ -49,50 +51,56 @@ module.exports.index = (req, res) => {
     "users" : userName,
     'per' : transaction,
     "arr" : arr,
-    "stt" : 0
+    "stt" : 1
   });
 }
-module.exports.create = (req, res) => {
-  var users = db.get('users').map('name').value();
-  var books = db.get('books').map('title').value();
+module.exports.create = async (req, res) => {
+  var users = await User.find();
+  var books = await Book.find();
+  var arrayUser = users.map(ele => {
+    return ele.name;
+  })
+  var arrayBook = books.map(ele => {
+    return ele.title;
+  })
   res.render('transactionCreate' , {
-    "users" : users ,
-    "books" : books 
+    "users" : arrayUser ,
+    "books" : arrayBook 
   });
 }
 
-module.exports.createPost = (req, res) => {
+module.exports.createPost = async (req, res) => {
   var user = req.body.user;
   var book = req.body.book;
-  var userId = db.get('users').find({name : user}).get('id').value();
-  var bookId = db.get('books').find({title : book}).get('id').value();
-  var id = shortId.generate();
+  // var userId = db.get('users').find({name : user}).get('id').value();
+  // var bookId = db.get('books').find({title : book}).get('id').value();
+  var userId = await User.find({name : user});
+  var bookId = await Book.find({title : book});
   var check = false;
   var value = {
-    bookId : bookId , 
-    userId : userId , 
-    id : id, 
+    bookId : bookId[0]._id , 
+    userId : userId[0]._id ,  
     isComplete : check
   }
-  db.get('transaction').push(value).write();
+  console.log(value);
+  // db.get('transaction').push(value).write();
+  await Transaction.insertMany(value);
   res.redirect('/transaction');
 }
 
-module.exports.remove = (req, res) => {
+module.exports.remove = async (req, res) => {
   var id = req.params.id;
-  db.get('transaction')
-    .remove({id : id})
-    .write();
+  await Transaction.findByIdAndRemove(id);
   res.redirect('/transaction')
 }
 
-module.exports.complete = (req, res) => {
+module.exports.complete = async (req, res) => {
   var id = req.params.id;
   var check = true;
-  db.get('transaction')
-    .find({id : id})
-    .assign({isComplete : true})
-    .value();
-  console.log(db.get('transaction').map('isComplete').value());
+  // db.get('transaction')
+  //   .find({id : id})
+  //   .assign({isComplete : true})
+  //   .value();
+  await Transaction.findByIdAndUpdate(id , {isComplete : check})
   res.redirect('/transaction');
 }

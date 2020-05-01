@@ -4,22 +4,28 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 const sgMail = require('@sendgrid/mail');
+var User = require('./models/user.model'); 
 
 module.exports.login = (req, res, next) => {
+  if(req.signedCookies.userId) {
+    res.clearCookie('userId');
+  }
   res.render('login');
 }
 
 module.exports.loginPost = async (req, res, next) => {
   var email = req.body.email;
-  var user = db.get('users').find({ email: email }).value();
-  if (!user) {
+  var user = await User.find({email : email})
+  // var user = db.get('users').find({ email: email }).value();
+  if (!user.length) {
     res.render('login', {
       "errors": ["Account doesn't not exist!"]
     })
     return;
   }
+  //console.log(user);
   var pass = req.body.pass;
-  if (user.wrongLoginCount >= 3) {
+  if (user[0].wrongLoginCount > 3) {
     res.render('login', {
       "errors": ["Your account has been locked! Try after 100 years"],
       "values": req.body
@@ -35,10 +41,12 @@ module.exports.loginPost = async (req, res, next) => {
 
   if (check != true) {
     // update each time wrong password , count++ , >= 3 => lock
-    db.get('users')
-      .find({ email: user.email })
-      .assign({ wrongLoginCount: user.wrongLoginCount + 1 })
-      .write()
+    // db.get('users')
+    //   .find({ email: user.email })
+    //   .assign({ wrongLoginCount: user.wrongLoginCount + 1 })
+    //   .write()
+    user[0].wrongLoginCount += 1;
+    user[0].save(); 
     res.render('login', {
       "errors": ["Wrong password, try again!"],
       "values": req.body
@@ -46,12 +54,15 @@ module.exports.loginPost = async (req, res, next) => {
     return;
   }
   // reset lai countWrongPass if log in successfully
-  db.get('users')
-    .find({ email: user.email })
-    .assign({ wrongLoginCount: 0 })
-    .write();
-  res.cookie('userId', user.id, { signed: true });
-  user.wrongLoginCount = 0;
+  // db.get('users')
+  //   .find({ email: user.email })
+  //   .assign({ wrongLoginCount: 0 })
+  //   .write();
+  await User.findOneAndUpdate({email : email} , {wrongLoginCount : 0});
+  
+  res.cookie('userId', user[0]._id, { signed: true });
+  //user[0].wrongLoginCount = 0;
+  console.log("user"  + user[0]);
   res.redirect('/transaction');
 }
 

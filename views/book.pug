@@ -27,18 +27,20 @@ block content
                 a.btn.btn-secondary(href="/books/" + item.id) Delete
                 a.btn.btn-light(href="/books/edit/" + item.id) Edit
                 a.btn.btn-primary(href="/books/view/" + item.id + "?page=" + currentPage) View
-  nav(aria-label='Page navigation example')
-    ul.pagination
-      li.page-item
-        a.page-link#pre Previous
-      li.page-item
-        a.page-link.page-number(href=`/books?page=${fixed1}`)= fixed1
-      li.page-item(style=`display:${display}`)
-        a.page-link.page-number( href=`/books?page=${fixed2}`)= fixed2
-      li.page-item(style=`display:${display}`)
-        a.page-link.page-number(href=`/books?page=${fixed3}`)= fixed3
-      li.page-item
-        a.page-link#next Next
+  .footer-book
+    a.log-out.btn.btn-primary(href="/login") Log Out
+    nav(aria-label='Page navigation example')
+      ul.pagination
+        li.page-item
+          a.page-link#pre Previous
+        li.page-item
+          a.page-link.page-number(href=`/books?page=${fixed1}`)= fixed1
+        li.page-item(style=`display:${display}`)
+          a.page-link.page-number( href=`/books?page=${fixed2}`)= fixed2
+        li.page-item(style=`display:${display}`)
+          a.page-link.page-number(href=`/books?page=${fixed3}`)= fixed3
+        li.page-item
+          a.page-link#next Next
 
 
   script.

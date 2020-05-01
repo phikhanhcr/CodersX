@@ -5,19 +5,19 @@ var controller = require('./controller.book.js');
 
 var validation = require('./validation/checkInput');
 
-function abc(req, res, next) {
-  var x = 5;
-  console.log(x);
-  res.locals.hi = x;
-  res.send('hello');
-  next();
-}
-function md2(req, res, next) {
-  console.log(res.locals.hi);
-  console.log(x);
-}
+// function abc(req, res, next) {
+//   var x = 5;
+//   console.log(x);
+//   res.locals.hi = x;
+//   res.send('hello');
+//   next();
+// }
+// function md2(req, res, next) {
+//   console.log(res.locals.hi);
+//   console.log(x);
+// }
 
-router.get('/test' , abc , md2);
+// router.get('/test' , abc , md2);
 
 router.get("/", controller.index);
 

@@ -98,3 +98,14 @@ body {
 .userUpdate .formUpdateAvatar {
   flex-grow: 7;
 }
+
+
+/* footer book */
+.footer-book {
+  display: flex;
+  justify-content:space-between;
+}
+.log-out {
+  height: 40px;
+  margin-top: 20px;
+}

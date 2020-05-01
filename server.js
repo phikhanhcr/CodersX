@@ -7,6 +7,9 @@ const express = require("express");
 const app = express();
 var bodyParser = require("body-parser");
 var cookieParser = require('cookie-parser');
+var mongoose = require('mongoose');
+mongoose.connect(process.env.MONGO_URL, { useFindAndModify: false , useNewUrlParser: true} );
+
 
 var bookRouter = require('./route.book.js');
 var userRouter = require('./route.user.js');

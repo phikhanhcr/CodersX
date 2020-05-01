@@ -4,7 +4,7 @@ block content
     h3 Buy something
     br
     br
-    table.table(style="text-align:center")#table
+    table.table(style="text-align:center")#tableCart
       tr
         th Choose
         th Name
@@ -22,12 +22,47 @@ block content
           td.total= item.money
           td
             a.btn.btn-secondary(href="#") Delete
-    span Total Money
+    B Total Money
     span &nbsp
     span &nbsp
     span &nbsp
-    p#total
+    span#total
   br
   a.btn.btn-primary(href="/cart/hire" , style="position: absolute;right:19%") Hire
-
-  
+  script.
+    var table = document.getElementById('tableCart');
+    var x = Array.from(document.getElementsByClassName("checkbox"));
+    var total = Array.from(document.getElementsByClassName("total"));
+    var totalArray = [];
+    for (var i of total) {
+      totalArray.push(parseInt(i.innerHTML));
+    }
+    console.log(totalArray);
+    table.addEventListener('change', hi);
+    var count = 0;
+    var arr= [];
+    function hi() {
+      var money = 0;
+      for (var i = 0; i < x.length; i++) {
+        if (x[i].checked) {
+          if (arr.indexOf(i) == -1) {
+            arr.push(i);
+          }
+          count++;
+        }
+        if (!x[i].checked) {
+          console.log('no check + ', i);
+          if (arr.indexOf(i) !== -1) {
+            arr.splice(arr.indexOf(i), 1);
+          }
+        }
+      }
+      count = 0;
+      console.log(arr);
+      for (var i of arr) {
+        money += totalArray[i];
+      }
+      console.log(money);
+      document.getElementById('total').innerHTML = money + " $";
+      money = 0
+    }
