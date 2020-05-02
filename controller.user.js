@@ -19,7 +19,7 @@ cloudinary.config({
 module.exports.index = async (req, res , next) => {
   try {
     var user = await User.find();
-    var a; a.b();
+    //var a; a.b();
     // use lowdb
     //var user = db.get("users").value();
     res.render("user", {
