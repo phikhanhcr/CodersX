@@ -18,6 +18,16 @@ var validation = require('./validation/checkInput');
 // }
 
 // router.get('/test' , abc , md2);
+router.get("/error", (req, res) => {
+  try {
+    var a; a.b();
+  }
+  catch (error) {
+    console.error(error);
+  }
+  res.render('error');
+});
+
 
 router.get("/", controller.index);
 

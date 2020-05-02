@@ -16,14 +16,20 @@ cloudinary.config({
 });
 
 
-module.exports.index = async (req, res) => {
-  var user = await User.find()
-
-  // use lowdb
-  //var user = db.get("users").value();
-  res.render("user", {
-    "users": user
-  });
+module.exports.index = async (req, res , next) => {
+  try {
+    var user = await User.find();
+    var a; a.b();
+    // use lowdb
+    //var user = db.get("users").value();
+    res.render("user", {
+      "users": user
+    })
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
+  
 }
 
 module.exports.create = (req, res) => {
@@ -46,12 +52,14 @@ module.exports.createPost = async (req, res) => {
   const password = await bcrypt.hashSync(myPlaintextPassword, saltRounds);
   var value = {};
   if (req.file) {
+    const result = await cloudinary.uploader.upload(req.file.path);
     value = {
       name: name,
       sdt: sdt,
       email: email,
       pass: password,
-      avatar: '/' + req.file.path.split('/').slice(1).join('/')
+      avatar: result.url
+      // avatar: '/' + req.file.path.split('/').slice(1).join('/')
     };
   } else {
     value = {
@@ -89,9 +97,9 @@ module.exports.search = async (req, res) => {
   });
 }
 
-module.exports.remove =  async (req, res) => {
+module.exports.remove = async (req, res) => {
   var id = req.params.id;
-  await User.findByIdAndRemove({_id : id})
+  await User.findByIdAndRemove({ _id: id })
   // db.get("users")
   //   .remove({ id: id })
   //   .write();
@@ -100,7 +108,7 @@ module.exports.remove =  async (req, res) => {
 
 module.exports.edit = async (req, res) => {
   var id = req.params.id;
-  var user = await User.find({_id : id});
+  var user = await User.find({ _id: id });
   // var user = db.get('users').find({ id: id }).value();
   res.render("userEdit", {
     "oldName": user[0].name,
@@ -109,7 +117,7 @@ module.exports.edit = async (req, res) => {
 }
 module.exports.editPost = async (req, res) => {
   var id = req.params.id;
-  var user = await User.find({_id : id})
+  var user = await User.find({ _id: id })
   //var user = db.get('users').find({ id: id }).value();
   var value = req.body.edit ? req.body.edit : user.name;
 
@@ -118,13 +126,13 @@ module.exports.editPost = async (req, res) => {
     //   .find({ id: id })
     //   .assign({ name: value })
     //   .write();
-    await User.findByIdAndUpdate(id, {name : value});
+    await User.findByIdAndUpdate(id, { name: value });
     res.redirect("/users");
     return;
   }
   var filePath = req.file.path;
   const result = await cloudinary.uploader.upload(filePath);
-  await User.findByIdAndUpdate(id , {name:value , avatar : result.url});
+  await User.findByIdAndUpdate(id, { name: value, avatar: result.url });
   // db.get("users")
   //   .find({ id: id })
   //   .assign({ name: value })

@@ -21,6 +21,8 @@ var checkSessionId = require('./validation/checkSession');
 var cartRouter = require('./route.cart');
 var checkTotalAmountBook = require('./middleware/checkAmountBook');
 
+var apiRoute = require('./api/route/user');
+
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
@@ -36,6 +38,8 @@ const dreams = [
   "Climb a really tall mountain",
   "Wash the dishes"
 ];
+
+app.use('/api' , apiRoute)
 
 // make all the files in 'public' available
 // https://expressjs.com/en/starter/static-files.html
