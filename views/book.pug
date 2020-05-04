@@ -32,90 +32,12 @@ block content
     nav(aria-label='Page navigation example')
       ul.pagination
         li.page-item
-          a.page-link#pre Previous
+          a.page-link.page-number(href=`/books?page=${pagenation[0]}`)= pagenation[0]
         li.page-item
-          a.page-link.page-number(href=`/books?page=${fixed1}`)= fixed1
-        li.page-item(style=`display:${display}`)
-          a.page-link.page-number( href=`/books?page=${fixed2}`)= fixed2
-        li.page-item(style=`display:${display}`)
-          a.page-link.page-number(href=`/books?page=${fixed3}`)= fixed3
+          a.page-link.page-number( href=`/books?page=${pagenation[1]}`)= pagenation[1]
         li.page-item
-          a.page-link#next Next
-
-
-  script.
-    var next = document.getElementById('next');
-    next.addEventListener('click', onClickNext);
-    var pre = document.getElementById('pre');
-    pre.addEventListener('click', onClickPre);
-    var total = parseInt(document.getElementById('total').innerHTML);
-    // so page
-    var perPage = Math.floor(total / 8);
-
-    // bien page 1 , 2 , 3 ban dau
-    var arr = Array.from(document.getElementsByClassName('page-number'));
-    var arrNumber = arr.map(ele => {
-    return parseInt(ele.text);
-    }) // [1,2,3]
-    for (var i = 0; i < 3; i++) {
-    arr[i].setAttribute('href', `/books?page=${arrNumber[i]}`);
-    }
-    function onClickNext() {
-    var arr = Array.from(document.getElementsByClassName('page-number'));
-    var arrNumber = arr.map(ele => {
-    return parseInt(ele.text);
-    }) // [1,2,3]
-    if (arrNumber[0] == 13) {
-    arrNumber[1].text = "";
-    arrNumber[2].text = "";
-    return;
-    }
-    var newValue = arrNumber.map(ele => {
-    return ele + 3;
-    })
-    console.log(newValue);
-    for (var i = 0; i < 3; i++) {
-      if (newValue[0] == 13) {
-        arr[0].text = 13;
-        arr[1].text = "";
-        arr[2].text = "";
-        arr[0].setAttribute('href', `/books?page=${13}`);
-
-        arr[2].parentNode.setAttribute('style' , 'display:none');
-        arr[1].parentNode.setAttribute('style' , 'display:none');
-      return;
-    }
-    arr[i].text = newValue[i];
-    arr[i].setAttribute('href', `/books?page=${newValue[i]}`);
-    }
-    }
-    function onClickPre () {
-    var arr = Array.from(document.getElementsByClassName('page-number'));
-    console.log(arr[0].text);
-    if(arr[0].text == 13 ){
-    arr[1].text = 14;
-    arr[2].text = 15;
-    }
-    var arrNumber = arr.map(ele => {
-      return parseInt(ele.text);
-    })
-    console.log(arrNumber);
-    if (arrNumber[0] == 1) {
-      return;
-    }
-    var newValue = arrNumber.map(ele => {
-    return ele - 3;
-    })
-    console.log(newValue)
-    for (var i = 0; i < 3; i++) {
-    arr[i].setAttribute('href', `/books?page=${newValue[i]}`);
-    if (newValue[i] <= 0  ) {
-    return;
-    }
-    if(newValue[0]  == 10 ){
-      arr[2].parentNode.setAttribute('style' , 'display:block');
-      arr[1].parentNode.setAttribute('style' , 'display:block');
-    }
-    arr[i].text = newValue[i];
-    }
-    }
+          a.page-link.page-number(href=`/books?page=${pagenation[2]}`)= pagenation[2]
+        li.page-item
+          a.page-link.page-number(href=`/books?page=${pagenation[3]}`)= pagenation[3]
+        li.page-item
+          a.page-link.page-number(href=`/books?page=${pagenation[4]}`)= pagenation[4]

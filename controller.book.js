@@ -3,6 +3,7 @@ var pug = require("pug");
 var shortId = require("shortid");
 var removeAccents = require("./removeAccents.js");
 var Book = require('./models/book.model');
+var pagenation = require('./pagenation');
 
 module.exports.index = async (req, res) => {
   // var books = db.get("books").value();
@@ -12,43 +13,13 @@ module.exports.index = async (req, res) => {
   var start = (page - 1) * perPage;
   var end = page * perPage;
   var currentPage = req.query.page ? req.query.page : 1;
-  var numberFixed = parseInt(currentPage);
-
-  var newObj = {};
-  var display = "block";
-  if (currentPage == 1 || currentPage == 4 || currentPage == 7 || currentPage == 10) {
-    newObj = {
-      first: numberFixed,
-      second: numberFixed + 1,
-      third: numberFixed + 2
-    }
-  } else if (currentPage == 2 || currentPage == 5 || currentPage == 8 || currentPage == 11) {
-    newObj = {
-      first: numberFixed - 1,
-      second: numberFixed,
-      third: numberFixed + 1
-    }
-  } else if (currentPage == 3 || currentPage == 6 || currentPage == 9 || currentPage == 12) {
-    newObj = {
-      first: numberFixed - 2,
-      second: numberFixed - 1,
-      third: numberFixed
-    }
-  } else if (currentPage == 13) {
-    //console.log(currentPage);
-    newObj = {
-      first: numberFixed,
-      second: "",
-      third: ""
-    }
-    display = "none";
-  }
+  var listPaganation = pagenation(currentPage , 13);  
   res.render("book", {
     "books": books.slice(start, end),
-    "fixed1": newObj.first,
-    "fixed2": newObj.second,
-    "fixed3": newObj.third,
-    "display": display,
+    "fixed1": listPaganation[0],
+    "fixed2": listPaganation[1],
+    "fixed3": listPaganation[2],
+    "pagenation" : listPaganation,
     "currentPage": currentPage
   });
 };
@@ -60,15 +31,13 @@ module.exports.create = (req, res) => {
 module.exports.createPost = async (req, res) => {
   var title = req.body.title;
   var desc = req.body.desc;
-  //var id = shortId.generate();
+
   var value = {
     title: title,
     desc: desc
   };
   await Book.insertMany(value);
-  // db.get("books")
-  //   .push(value)
-  //   .write();
+
   res.redirect("/books");
 };
 
@@ -82,16 +51,7 @@ module.exports.search = async (req, res) => {
   var books = listBook.filter(ele => {
     return removeAccents(ele.title).toLowerCase().indexOf(removeAccents(search).toLowerCase()) !== -1
   })
-  // var books = db
-  //   .get("books")
-  //   .value()
-  //   .filter(ele => {
-  //     return (
-  //       removeAccents(ele.title)
-  //         .toLowerCase()
-  //         .indexOf(removeAccents(search).toLowerCase()) !== -1
-  //     );
-  //   });
+ 
   res.render("book", {
     "books": books.slice(start, end)
   });
