@@ -91,7 +91,7 @@ module.exports.createPost = async (req, res) => {
 module.exports.remove = async (req, res) => {
   var id = req.params.id;
   await Transaction.findByIdAndRemove(id);
-  res.redirect('/transaction')
+  res.redirect('/transaction');
 }
 
 module.exports.complete = async (req, res) => {

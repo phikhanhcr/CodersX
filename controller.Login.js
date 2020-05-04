@@ -6,6 +6,10 @@ const saltRounds = 10;
 const sgMail = require('@sendgrid/mail');
 var User = require('./models/user.model'); 
 
+var cloudinary = require('./cloudinary');
+
+
+
 module.exports.login = (req, res, next) => {
   if(req.signedCookies.userId) {
     res.clearCookie('userId');
@@ -72,9 +76,9 @@ module.exports.forgotPass = (req, res, next) => {
 module.exports.resetPass = async (req, res, next) => {
 
   var email = req.body.email;
-  var user = db.get('users').find({ email: email }).value();
+  var user = await User.find({email : email});
 
-  if (!user) {
+  if (!user.length) {
     res.render('forgotPass', {
       "errors": ['Email is not registered!']
     })
@@ -112,4 +116,50 @@ module.exports.resetPass = async (req, res, next) => {
 
 
   res.redirect('/transaction');
+}
+
+
+module.exports.signIn = async (req, res , next ) => {
+  res.render('signin');
+}
+module.exports.postSignIn = async (req, res , next ) => {
+  
+  var email = req.body.email;
+  var user = await User.find({email : email });
+  if(user.length) {
+    res.render('signin' , {
+      "errors" : ["Email already exists"]
+    })
+    return;
+  }
+  if(req.body.pass !== req.body.pass2) {
+    res.render('signin' , {
+      "errors" : ["2 passwords do not match"]
+    })
+    return;
+  }
+  var value = {};
+  if(req.file) {
+    const result = await cloudinary.uploader.upload(req.file.path);
+    value = {
+      name : req.body.name ,
+      email : req.body.email , 
+      sdt : req.body.sdt,
+      pass : req.body.pass,
+      isAdmin : false ,
+      wrongLoginCount : 0, 
+      avatar : result.url
+    } 
+  } else {
+    value = {
+      name : req.body.name ,
+      email : req.body.email , 
+      sdt : req.body.sdt,
+      pass : req.body.pass,
+      isAdmin : false ,
+      wrongLoginCount : 0
+    }
+  }
+  await User.insertMany(value);
+  res.redirect('/login');
 }

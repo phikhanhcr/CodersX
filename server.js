@@ -20,6 +20,7 @@ var checkAdmin = require('./middleware/checkAdmin');
 var checkSessionId = require('./validation/checkSession');
 var cartRouter = require('./route.cart');
 var checkTotalAmountBook = require('./middleware/checkAmountBook');
+var shopRouter = require('./route.shop')
 
 var apiRoute = require('./api/route/user');
 
@@ -61,6 +62,8 @@ app.use('/books' ,checkCookie.checkCookie , bookRouter);
 app.use('/users', checkAdmin.checkAdmin, checkCookie.checkCookie, userRouter);
 app.use('/transaction', checkCookie.checkCookie, transactionRouter);
 app.use('/login', loginRouter);
+app.use('/shop' ,checkCookie.checkCookie, shopRouter);
+
 
 app.use('/cart' , cartRouter);
 app.use(express.static('public'));

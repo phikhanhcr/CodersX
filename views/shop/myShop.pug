@@ -1,0 +1,22 @@
+extends ../commom.pug
+block content
+  header
+  h1=nameShop
+  a(href=avatarShop, target='_blank')
+    img.bookAvatar(src=avatarShop)
+  br
+  a.btn.btn-primary(href='/shop/' + idShop + "/createBook") Create 
+  br
+  .books
+    .row
+      each item in books
+        .col-lg-3.col-sm-6.col-12.wrapper-row
+          .wrapper-book
+            .img-book(style=`background-image:url(${item.avatar});`)
+            .details
+              h4= item.title
+              p= item.desc
+              .more-option
+                a.btn.btn-secondary(href="#") Delete
+                a.btn.btn-light(href="#") Edit
+                a.btn.btn-primary(href=`/shop/${idShop}/viewOne/${item._id}`) View

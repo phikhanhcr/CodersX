@@ -22,6 +22,8 @@ module.exports.addCart = async (req, res, next) => {
   if (book.cart[cartLength] == undefined) {
     count = 0;
   }
+
+  // note : 
   console.log("cartLength : " + cartLength);
   if (cartLength == 0) {
     book.cart[0] = {

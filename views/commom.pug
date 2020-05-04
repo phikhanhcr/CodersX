@@ -31,5 +31,9 @@ body
             span &nbsp
             span &nbsp
             span= totalAmount
+        li(style=`display:${displayNewShop}`).nav-item
+          a.nav-link(href='/shop/' + IdUser + '/create') Create a new Shop
+        li(style=`display:${check2}`).nav-item
+          a.nav-link(href='/shop/' + IdUser) My Shop 
   .container
     block content

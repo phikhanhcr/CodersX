@@ -1,0 +1,27 @@
+doctype html
+head
+  meta(http-equiv='X-UA-Compatible', content='IE=edge')
+  meta(name='viewport', content='width=device-width, initial-scale=1')
+  meta(name='description', content='A cool thing made with Glitch')
+  link#favicon(rel='icon', href='https://glitch.com/edit/favicon-app.ico', type='image/x-icon')
+  link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css')
+  link(rel='stylesheet', href='/style.css')
+
+.container
+  header
+    h1 Sign In For Free 
+  if errors
+    each err in errors
+      .alert.alert-danger.errorfill= err
+  form(action="/login/signin",method="POST" , enctype="multipart/form-data")
+    input(type='email' ,placeholder='Email', name='email', value = values ? values.email : '', required)
+    input(type='text' ,placeholder='Name', name='name', value = values ? values.name : '' , required)
+    input(type='number' ,placeholder='Telephone number', name='sdt' , value = values ? values.sdt : '' , required)
+    input(type='password' ,placeholder='Password', name='pass'  , required)
+    input(type='password' ,placeholder='Password Again', name='pass2'  , required)
+    input(type="file" , name="avatar")
+    button#btn.btn.btn-primary
+      | Sign In
+  script(src='https://button.glitch.me/button.js')
+
+
